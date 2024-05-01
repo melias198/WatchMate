@@ -1,7 +1,6 @@
 const loadMovie = (search) => {
     console.log(search);
     document.getElementById("movie-list").innerHTML = "";
-    // document.getElementById("spinner").style.display="block";
     document.getElementById("nodata").style.display="none";
     let url = 'https://watchmate.onrender.com/watch/list/';
     if (search) {
@@ -11,15 +10,11 @@ const loadMovie = (search) => {
     .then((res) => res.json())
     .then((data) => {
         if(data.results.length>0){
-            // document.getElementById("spinner").style.display="none";
-            // document.getElementById("no-data").style.display="none";
             displayMovie(data?.results);
         }
         else{
             document.getElementById("nodata").style.display="block";
-            // document.getElementById("doctors").innerHTML = "";
-            // document.getElementById("spinner").style.display="none";
-            // document.getElementById("no-data").style.display="block";
+            document.getElementById("movie-list").innerHTML = "";
         }
     });
 };

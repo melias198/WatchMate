@@ -16,7 +16,7 @@ const displayMovies = (movies) => {
         newDiv.classList.add("latest-movie");
 
         newDiv.innerHTML = `
-        <a href="#"><img src="${movie.image}" alt="Movie 3"></a>
+        <a href="#"><img style="width:270px; height:380px;" src="${movie.image}" alt=""></a>
         `;
         
         div.appendChild(newDiv);

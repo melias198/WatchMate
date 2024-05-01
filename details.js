@@ -119,8 +119,21 @@ const handleReview = () => {
     .then((res) => res.json())
     .then((data) => {
       console.log('error',data);
-      const p = document.getElementById('error-message');
-      p.textContent = data;
+      if(data.detail)
+      {
+        const p = document.getElementById('error-message');
+        p.textContent = 'You must be logged in to give a review!';
+      }
+      else if(data.id)
+      {
+        const p = document.getElementById('error-message');
+        p.textContent = 'Review create successfully. Please reload.';
+      }
+      else
+      {
+        const p = document.getElementById('error-message');
+        p.textContent = "You've already given a review for this content.";
+      };
     });
     
 };
