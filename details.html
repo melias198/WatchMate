@@ -5,7 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
 		
-		<title>Movie Review | Single</title>
+		<title>WatchMate | Movie Details</title>
 
 		<!-- Loading third party fonts -->
 		<link href="http://fonts.googleapis.com/css?family=Roboto:300,400,700|" rel="stylesheet" type="text/css">
@@ -40,8 +40,9 @@
 						<button type="button" class="menu-toggle"><i class="fa fa-bars"></i></button>
 						<ul class="menu">
 							<li class="menu-item"><a href="index.html">Home</a></li>
-							<li class="menu-item current-menu-item"><a href="review.html">Movie reviews</a></li>
-							<li class="menu-item"><a href="login.html">Login</a></li>
+							<li class="menu-item current-menu-item"><a href="review.html">Movie Reviews</a></li>
+							<li id="loginLink" class="menu-item"><a href="login.html">Login</a></li>
+							<li id="logoutLink" onclick="handlelogOut()" class="menu-item"><a href="#">Logout</a></li>
 						</ul> <!-- .menu -->
 
 						<!-- <form action="#" class="search-form">
@@ -57,10 +58,10 @@
 			<main class="main-content">
 				<div class="container">
 					<div class="page">
-						<div class="breadcrumbs">
+						<div id="breadcrumbs" class="breadcrumbs">
 							<a href="index.html">Home</a>
 							<a href="review.html">Movie Review</a>
-							<span>The Croods</span>
+							<!-- <span></span> -->
 						</div>
 
 						<div class="content">
@@ -103,8 +104,13 @@
 									<option value="4">4</option>
 									<option value="5">5</option>
 								</select>
-								<textarea id="review-massege" class="message" placeholder="comments..."></textarea>
+								<textarea id="review-massege" class="message" placeholder="Write your thoughts about this movie...."></textarea>
 								<input onclick="handleReview()" type="submit" value="Create Review">
+
+								<!-- <div id="error-message">
+
+								</div> -->
+								<p style="color: red;" id="error-message"></p>
 
 							</div>
 							<h1>Reviews</h1>
@@ -134,6 +140,7 @@
 		<script src="js/plugins.js"></script>
 		<script src="js/app.js"></script>
 		<script src="./details.js"></script>
+		<script src="./logout.js"></script>
 		
 	</body>
 

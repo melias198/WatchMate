@@ -2,7 +2,7 @@ const loadMovie = (search) => {
     console.log(search);
     document.getElementById("movie-list").innerHTML = "";
     // document.getElementById("spinner").style.display="block";
-    // document.getElementById("no-data").style.display="none";
+    document.getElementById("nodata").style.display="none";
     let url = 'https://watchmate.onrender.com/watch/list/';
     if (search) {
         url += `?search=${search}`;
@@ -16,6 +16,7 @@ const loadMovie = (search) => {
             displayMovie(data?.results);
         }
         else{
+            document.getElementById("nodata").style.display="block";
             // document.getElementById("doctors").innerHTML = "";
             // document.getElementById("spinner").style.display="none";
             // document.getElementById("no-data").style.display="block";
@@ -33,8 +34,18 @@ const loadMovie = (search) => {
 //       .catch((err) => console.log(err));
 // };
 
+function shuffleMovie(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
 
 const displayMovie = (movies) => {
+    shuffleMovie(movies);
+
     movies.forEach((movie) => {
       const parent = document.getElementById("movie-list");
 
@@ -56,9 +67,7 @@ const displayMovie = (movies) => {
       `;
       div.appendChild(newDiv);
 
-      div.innerHTML += `
-      
-      <p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>`;
+      div.innerHTML += ``;
       
       parent.appendChild(div);
     });

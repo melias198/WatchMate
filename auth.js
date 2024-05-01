@@ -31,8 +31,22 @@ const handleRegistration = (event) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data)
-            window.location.href = "login.html";
+            console.log('info',data)
+            if(data.response)
+            {
+                window.location.href = "login.html";
+            }
+            else{
+                if(data.username){
+                    const p = document.getElementById('signup-error-message');
+                    p.textContent = 'A user with that username already exists!';
+                }
+                else
+                {
+                    const p = document.getElementById('signup-error-message');
+                    p.textContent = 'Email already exists!';
+                }
+            };
         });
       } else {
         document.getElementById("error").innerText =
@@ -41,7 +55,6 @@ const handleRegistration = (event) => {
     } else {
       document.getElementById("error").innerText =
         "Password and confirm password do not match!";
-      alert("Password and confirm password do not match!");
     }
   };
   
@@ -70,6 +83,11 @@ const handleRegistration = (event) => {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user_id", data.user_id);
             window.location.href = "index.html";
+          }
+          else
+          {
+            const p = document.getElementById('login-error-message');
+            p.textContent = 'Incorrect Username or Password!';
           }
         });
     }

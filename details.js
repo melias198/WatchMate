@@ -11,6 +11,11 @@ const getparams = () => {
 
 
 const displayDetails = (movie) => {
+    const movie_name = document.getElementById("breadcrumbs");
+    const span = document.createElement("span");
+    span.textContent = `${movie.title}`;
+    movie_name.appendChild(span);
+
     const parent = document.getElementById("details-part");
 
     const div = document.createElement("div");
@@ -43,8 +48,8 @@ const displayDetails = (movie) => {
     ul.classList.add("movie-meta");
     ul.innerHTML = ` 
     <li><strong>Rating: </strong> ${movie.avg_rating} out of 5</li>
-	<li><strong>Length: </strong> ${movie.length} min</li>
-	<li><strong>Premiere: </strong> ${movie.release}</li>
+	  <li><strong>Length: </strong> ${movie.length} min</li>
+	  <li><strong>Premiere: </strong> ${movie.release}</li>
     <li><strong>Category: </strong>
     ${movie.category.map((item) => {
         return `${item}`;
@@ -57,8 +62,8 @@ const displayDetails = (movie) => {
     startUl.classList.add("starring");
     startUl.innerHTML = `
     <li><strong>Directors: </strong> ${movie.director} </li>
-	<li><strong>Writers: </strong> ${movie.writer} </li>
-	<li><strong>Stars:</strong> ${movie.stars} </li>
+	  <li><strong>Writers: </strong> ${movie.writer} </li>
+	  <li><strong>Stars:</strong> ${movie.stars} </li>
     `;
     newDiv.appendChild(startUl);
 
@@ -73,8 +78,8 @@ const movieReview = (reviews) => {
         const parent = document.getElementById("review-part");
         const div = document.createElement("div");
         div.innerHTML = `
-        <h4> <strong>User: </strong> ${review.reviewer} <br> 
-        <strong>Rating: </strong> ${review.rating} <br>
+        <h4> <strong>user: </strong> ${review.reviewer} <br> 
+        <strong>rating: </strong> ${review.rating} <br>
         <p class="border border-primary">${review.description}</p>
         </h4>
         <hr>
@@ -92,9 +97,10 @@ const handleReview = () => {
     const massege = document.getElementById("review-massege").value;
 
     const Token = localStorage.getItem("token");
-
+    const User = localStorage.getItem("user_id");
+    
     const info = {
-     reviewer: 3,
+     reviewer: User,
      title: "Good Movie",
      rating: rating,
      description: massege,
@@ -106,16 +112,17 @@ const handleReview = () => {
   fetch(`https://watchmate.onrender.com/watch/list/${param}/review/create/`, {
     method: "POST",
     headers: { 
-      "Authorization": `Bearer ${Token}`,
+      "Authorization": `Token ${Token}`,
       "content-type": "application/json" },
     body: JSON.stringify(info),
   })
     .then((res) => res.json())
     .then((data) => {
-    //   window.location.href = `pdf.html?doctorId=${param}`;
-      // handlePdf();
-      // console.log(data);
+      console.log('error',data);
+      const p = document.getElementById('error-message');
+      p.textContent = data;
     });
+    
 };
 
 getparams();
